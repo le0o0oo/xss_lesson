@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM-based XSS Demo</title>
+    <style>body { font-family: sans-serif; padding: 20px; }</style>
+</head>
+<body>
+    <h1>Benvenuto nell'app DOM-based</h1>
+    
+    <div id="welcome-message"></div>
+
+    <script>
+        // DOM-based XSS: Lo script legge l'hash dall'URL e lo scrive nel DOM usando innerHTML senza sanitizzazione.
+        function updateMessage() {
+            const hash = decodeURIComponent(window.location.hash.substring(1));
+            const messageDiv = document.getElementById('welcome-message');
+            
+            if (hash) {
+                // VULNERABILITÀ: innerHTML esegue tag HTML
+                messageDiv.innerHTML = "Ciao, " + hash + "!";
+            } else {
+                messageDiv.innerText = "Non hai impostato un messaggio nell'URL (usa #...).";
+            }
+        }
+
+        // Esegui al caricamento e al cambio di hash
+        window.addEventListener('load', updateMessage);
+        window.addEventListener('hashchange', updateMessage);
+    </script>
+
+    <hr>
+    <p>Istruzioni:</p>
+    <ul>
+        <li>Aggiungi un testo all'URL dopo il cancelletto, es: <code>#Utente</code></li>
+        <li>Prova un attacco XSS: <code>#&lt;img src=x onerror=alert(1)&gt;</code></li>
+    </ul>
+</body>
+</html>
