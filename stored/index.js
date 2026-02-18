@@ -65,6 +65,10 @@ app.get('/', (req, res) => {
                 <button type="submit">Pubblica</button>
             </form>
             <p><small><a href="/reset">Reset posts</a></small></p>
+
+            <footer>
+                <p><a href="https://github.com/le0o0oo/xss_lesson/blob/main/stored/index.js">Codice sorgente</a></p>
+            </footer>
         </body>
         </html>
     `);

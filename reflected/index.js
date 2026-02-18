@@ -5,8 +5,7 @@ const port = 3001;
 // Reflected XSS: Il valore del parametro 'q' viene inserito direttamente nella risposta HTML senza sanitizzazione.
 app.get('/', (req, res) => {
     const query = req.query.q || '';
-    res.send(`
-        <!DOCTYPE html>
+    res.send(`<!DOCTYPE html>
         <html lang="it">
         <head>
             <meta charset="UTF-8">
@@ -21,9 +20,12 @@ app.get('/', (req, res) => {
             </form>
             
             ${query ? `<p>Risultati per: <b>${query}</b></p>` : ''}
+
+            <footer>
+                <p><a href="https://github.com/le0o0oo/xss_lesson/blob/main/reflected/index.js">Codice sorgente</a></p>
+            </footer>
         </body>
-        </html>
-    `);
+    </html>`);
 });
 
 app.listen(port, () => {
